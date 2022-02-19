@@ -35,12 +35,11 @@ public class RacingGame {
         tryCount--;
     }
 
-    public List<String> getWinners() {
+    public List<Car> getWinners() {
         Collections.sort(cars);
 
         return cars.stream()
                 .filter(car -> car.compareTo(cars.get(FIRST_WINNER_INDEX)) == EQUAL_CODE)
-                .map(Car::getCarName)
                 .collect(Collectors.toList());
     }
 

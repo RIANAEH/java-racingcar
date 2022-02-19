@@ -16,7 +16,7 @@ public class RacingGameTest {
                 new Car("a", 3), new Car("b", 2),
                 new Car("c", 2), new Car("d", 1));
 
-        assertThat(new RacingGame(cars).getWinners()).containsExactly("a");
+        assertThat(new RacingGame(cars).getWinners()).containsExactly(cars.get(0));
     }
 
     @Test
@@ -26,6 +26,6 @@ public class RacingGameTest {
                 new Car("a", 3), new Car("b", 2),
                 new Car("c", 3), new Car("d", 1));
 
-        assertThat(new RacingGame(cars).getWinners()).contains("a", "c");
+        assertThat(new RacingGame(cars).getWinners()).contains(cars.get(0), cars.get(1));
     }
 }
