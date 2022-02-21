@@ -1,17 +1,12 @@
 package racingcar.model;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import racingcar.utils.RandomNumberGenerator;
 
 public class RacingGame {
 
     private final static int TRY_COUNT_END_NUMBER = 0;
-    private final static int FIRST_WINNER_INDEX = 0;
-    private final static int EQUAL_CODE = 0;
 
-    private final List<Car> cars;
+    private final Cars cars;
     private int tryCount;
 
     public RacingGame(List<Car> cars) {
@@ -19,7 +14,7 @@ public class RacingGame {
     }
 
     public RacingGame(List<Car> cars, int tryCount) {
-        this.cars = cars;
+        this.cars = new Cars(cars);
         this.tryCount = tryCount;
     }
 
@@ -28,22 +23,16 @@ public class RacingGame {
     }
 
     public void race() {
-        for (Car car : cars) {
-            car.moveForward(RandomNumberGenerator.pickRandomNumber());
-        }
-
+        cars.move();
         tryCount--;
     }
 
     public List<Car> getWinners() {
-        Collections.sort(cars);
-
-        return cars.stream()
-                .filter(car -> car.compareTo(cars.get(FIRST_WINNER_INDEX)) == EQUAL_CODE)
-                .collect(Collectors.toList());
+        cars.sort();
+        return cars.getSamePositionCars(cars.getFirstPositionCar());
     }
 
     public List<Car> getCars() {
-        return cars;
+        return cars.getCars();
     }
 }

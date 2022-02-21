@@ -13,14 +13,7 @@ import racingcar.view.OutputView;
 
 public class GameController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
     private RacingGame racingGame;
-
-    public GameController() {
-        inputView = new InputView();
-        outputView = new OutputView();
-    }
 
     public void run() {
         ready();
@@ -37,7 +30,7 @@ public class GameController {
 
     private String[] inputCarNames() {
         try {
-            String[] carNames = inputView.inputCarNames();
+            String[] carNames = InputView.inputCarNames();
             CarNamesValidator.validateCarNames(carNames);
             return carNames;
         } catch (Exception e) {
@@ -54,7 +47,7 @@ public class GameController {
 
     private int inputTryCount() {
         try {
-            String tryCountInput = inputView.inputTryCount();
+            String tryCountInput = InputView.inputTryCount();
             TryCountValidator.validateTryCount(tryCountInput);
             return Integer.parseInt(tryCountInput);
         } catch (Exception e) {
@@ -64,17 +57,17 @@ public class GameController {
     }
 
     private void start() {
-        outputView.printResultMessage();
+        OutputView.printResultMessage();
 
         while (!racingGame.isEnd()) {
             racingGame.race();
-            outputView.printResult(racingGame.getCars());
+            OutputView.printResult(racingGame.getCars());
         }
     }
 
     private void result() {
         List<Car> winners = racingGame.getWinners();
 
-        outputView.printWinners(winners);
+        OutputView.printWinners(winners);
     }
 }
